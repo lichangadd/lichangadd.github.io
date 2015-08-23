@@ -13,10 +13,10 @@
 <meta property="og:site_name" content="lichangadd">
 <meta property="og:description" content="最近把蝌蚪音客的图片展现框架由Picasso切换到Fresco,因为Fresco使用的是公共内存区,所以切换之后的效果还是很明显的,之前app的内存占用在60MB左右，切换到Fresco后降低了将近一半。
 因为蝌蚪音客用到了图片预处理功能，如下图：       为了减少dom个数，作品封面左下角的小图标是在图片展现时通过Bitmap绘制上去的。之前Picasso是用transform来处理,Fre">
-<meta property="og:image" content="http://www.fresco-cn.org/static/fresco-hero-logo.png">
+<meta property="og:image" content="http://7mj50b.com1.z0.glb.clouddn.com/fresco-hero-logo.png?imageView2/2/w/424">
 <meta property="og:image" content="http://7mj50b.com1.z0.glb.clouddn.com/pic1.png?imageView2/2/w/300/q/100">
 <meta property="og:image" content="http://7mj50b.com1.z0.glb.clouddn.com/pic2.png?imageView2/2/w/300/q/100">
-<meta property="og:updated_time" content="2015-08-23T03:13:42.000Z">
+<meta property="og:updated_time" content="2015-08-23T03:23:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Fresco Processor处理图片">
 <meta name="twitter:description" content="最近把蝌蚪音客的图片展现框架由Picasso切换到Fresco,因为Fresco使用的是公共内存区,所以切换之后的效果还是很明显的,之前app的内存占用在60MB左右，切换到Fresco后降低了将近一半。
@@ -234,7 +234,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.fresco-cn.org/static/fresco-hero-logo.png" alt=""></p>
+        <p><img src="http://7mj50b.com1.z0.glb.clouddn.com/fresco-hero-logo.png?imageView2/2/w/424" alt=""></p>
 <p>最近把<a href="http://www.kedouinc.com/" target="_blank" rel="external">蝌蚪音客</a>的图片展现框架由Picasso切换到Fresco,因为Fresco使用的是公共内存区,所以切换之后的效果还是很明显的,之前app的内存占用在60MB左右，切换到Fresco后降低了将近一半。</p>
 <p>因为<a href="http://www.kedouinc.com/" target="_blank" rel="external">蝌蚪音客</a>用到了图片预处理功能，如下图：<br><img src="http://7mj50b.com1.z0.glb.clouddn.com/pic1.png?imageView2/2/w/300/q/100" alt="cmd-markdown-logo">       <img src="http://7mj50b.com1.z0.glb.clouddn.com/pic2.png?imageView2/2/w/300/q/100" alt="cmd-markdown-logo"><br>为了减少dom个数，作品封面左下角的小图标是在图片展现时通过Bitmap绘制上去的。之前Picasso是用transform来处理,Fresco对应的功能是通过Processor来实现的。</p>
 <p>感觉Fresco的这个功能没有Picasso封装的方便,Picasso的transform可以支持多个,这样的话如果一个图片需要处理多次，可以通过<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Picasso.with(ctx).load(path).transform(<span class="keyword">new</span> AudioTransform()).transform(<span class="keyword">new</span> FeaturTransform()).into(imageView);</span><br></pre></td></tr></table></figure></p>
