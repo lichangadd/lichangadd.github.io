@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lichangadd</title>
+  <title>使用Fresco Processor处理图片 | lichangadd</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="蝌蚪音客Android核心开发工程师">
-<meta property="og:type" content="website">
-<meta property="og:title" content="lichangadd">
-<meta property="og:url" content="http://lichangadd.com/index.html">
+  <meta name="description" content="最近把蝌蚪音客的图片展现框架由Picasso切换到Fresco,因为Fresco使用的是公共内存区,所以切换之后的效果还是很明显的,之前app的内存占用在60MB左右，切换到Fresco后降低了将近一半。
+因为蝌蚪音客用到了图片预处理功能，如下图：       为了减少dom个数，作品封面左下角的小图标是在图片展现时通过Bitmap绘制上去的。之前Picasso是用transform来处理,Fre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Fresco Processor处理图片">
+<meta property="og:url" content="http://lichangadd.com/2015/08/23/使用Fresco-Processor处理图片/index.html">
 <meta property="og:site_name" content="lichangadd">
-<meta property="og:description" content="蝌蚪音客Android核心开发工程师">
+<meta property="og:description" content="最近把蝌蚪音客的图片展现框架由Picasso切换到Fresco,因为Fresco使用的是公共内存区,所以切换之后的效果还是很明显的,之前app的内存占用在60MB左右，切换到Fresco后降低了将近一半。
+因为蝌蚪音客用到了图片预处理功能，如下图：       为了减少dom个数，作品封面左下角的小图标是在图片展现时通过Bitmap绘制上去的。之前Picasso是用transform来处理,Fre">
+<meta property="og:image" content="http://www.fresco-cn.org/static/fresco-hero-logo.png">
+<meta property="og:image" content="http://7mj50b.com1.z0.glb.clouddn.com/pic1.png?imageView2/2/w/300/q/100">
+<meta property="og:image" content="http://7mj50b.com1.z0.glb.clouddn.com/pic2.png?imageView2/2/w/300/q/100">
+<meta property="og:updated_time" content="2015-08-23T03:13:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lichangadd">
-<meta name="twitter:description" content="蝌蚪音客Android核心开发工程师">
+<meta name="twitter:title" content="使用Fresco Processor处理图片">
+<meta name="twitter:description" content="最近把蝌蚪音客的图片展现框架由Picasso切换到Fresco,因为Fresco使用的是公共内存区,所以切换之后的效果还是很明显的,之前app的内存占用在60MB左右，切换到Fresco后降低了将近一半。
+因为蝌蚪音客用到了图片预处理功能，如下图：       为了减少dom个数，作品封面左下角的小图标是在图片展现时通过Bitmap绘制上去的。之前Picasso是用transform来处理,Fre">
   
     <link rel="alternative" href="/atom.xml" title="lichangadd" type="application/atom+xml">
   
@@ -190,75 +197,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-Android视频录制app解决方案汇总" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/23/Android视频录制app解决方案汇总/" class="article-date">
-  	<time datetime="2015-08-23T03:09:12.000Z" itemprop="datePublished">2015-08-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/23/Android视频录制app解决方案汇总/">Android视频录制app解决方案汇总</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7mj50b.com1.z0.glb.clouddn.com/icon.png?imageView2/1/h/100" alt="此处输入图片的描述">   <img src="http://7mj50b.com1.z0.glb.clouddn.com/ffmpeg.jpeg" alt="此处输入图片的描述"><br>现在市面上视频App有很多，例如：<a href="http://www.kedouinc.com" title="蝌蚪音客" target="_blank" rel="external">蝌蚪音客</a>、美拍、小影还有最近火起来的小咖秀。这类App的技术难点基本都是在音视频处理这一块，iOS对多媒体处理的支持还算比较丰富，但是Android就会差很多。这里总结蝌蚪音客在多媒体处理上遇到的问题，供大家参考下。</p>
-<ol>
-<li><p>录制方视频<br>现在市面上的视频应用的视频尺基本全部都是1：1的，这对于Android开发者来说就是一个比较棘手的问题，Android原生Recorder类并不支持视频比例的设置。所以只能想其他办法，目前常用的办法大致可以分为2种：</p>
-<p> <strong>a. 摒弃原生接口，使用FFmpeg或OpenCV等方式进行录制</strong><br> 这类方法的缺点在于对开发者技术要求较高，FFmpeg和OpenCV移植麻烦，多机型兼容复杂并且要求开发者一定程度的C语言功底，但是最难解决的问题是性能问题，FFmeg和OpenCV都是开源方案，如果要真正达实用级别往往还需要优化定制，这对于熟练于做Android展现的开发者来说完全就是一个新的领域。<a href="http://www.kedouinc.com" title="蝌蚪音客" target="_blank" rel="external">蝌蚪音客</a>就尝试过这种方案，结果视频的码率只能做到15fps左右，这明显是不够的。</p>
-<p> <strong>b. 使用原生API录制</strong><br> 在录制界面使遮罩的方式给用户一种1：1的错觉。在预览视频时，使用FFmpeg进行视频裁剪。如果团队没有驾驭FFmpeg的能力，我个人建议使用这种方式。对于视频录制功能来说相对简单，而且裁剪命令优化后基本可以可以做到视频预览一遍也就基本裁剪完毕。</p>
-</li>
-<li><p>本地视频压缩<br> 本地视频压缩除了FFmpeg之外目前还没有了解到有其他方案，而且如果使用上面说到的b方案进行视频录制的话，本身就已经引入了FFmpeg。那就不用白不用了，但是压缩命令的优化可是一门学问，使用x264还是mpeg4，码率，分辨率，帧频，文件大小等都会影响到压缩速度而且差别相当大。</p>
-</li>
-<li>m3u8解决方案<br> 绝对不建议创业公司自己编写播放器，绝对无底洞，还不如直接使用MP4文件格式。m3u8国内比较出名的是vitamio，还有一些韩国人的技术方案。但是vitamio的开源版本感觉很久没有更新，而且商业版本的授权动则几十万，这里我推荐使用百度媒体云的m3u8的解决方案，代码家的AnimeTaste使用的就是这个，完全免费，项目质量还算稳定。但是只能做成单例，如果想集成到listview中，需要费点事。</li>
-<li>视频滤镜、水印<br> 先说水印吧，如果集成了FFmpeg的话，直接在视频处理的过程中可以并行处理水印。如果你需要视频滤镜的功能，那么恭喜你，赶紧花钱招大牛吧。据说小影的开发Leader在视频处理领域里沉浸了20多年。目前这部分笔者还是在了解阶段，目前看到的方案有使用GPUImage进行处理的，但是无奈对图像处理的知识掌握的太少，迟迟没有动手。</li>
-</ol>
-<p>另外，7月中旬阿里百川开了发布会，宣布将和趣拍合作推出多媒体SDK，在和趣拍的沟通中，感觉趣拍团队的技术支持和响应速度还是很不错的，不过现在推出的SDK扩展性还有待提高，不过趣拍团队也一直在做迭代。个人还是比较看好的。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFmpeg/">FFmpeg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蝌蚪音客/">蝌蚪音客</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视频录制/">视频录制</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-使用Fresco-Processor处理图片" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-使用Fresco-Processor处理图片" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/08/23/使用Fresco-Processor处理图片/" class="article-date">
@@ -274,12 +213,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/23/使用Fresco-Processor处理图片/">使用Fresco Processor处理图片</a>
+    <h1 class="article-title" itemprop="name">
+      使用Fresco Processor处理图片
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fresco/">Fresco</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -296,31 +246,66 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fresco/">Fresco</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/23/Android视频录制app解决方案汇总/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android视频录制app解决方案汇总
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
 
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="使用Fresco-Processor处理图片" data-title="使用Fresco Processor处理图片" data-url="http://lichangadd.com/2015/08/23/使用Fresco-Processor处理图片/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -344,8 +329,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
